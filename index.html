@@ -3,929 +3,778 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>2026年度工作总结 — 张淼</title>
+<title>2026半年度工作总结 — 张淼</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   :root {
-    --primary: #2563eb;
-    --primary-light: #3b82f6;
-    --primary-dark: #1d4ed8;
-    --primary-bg: #eff6ff;
-    --accent: #f59e0b;
-    --accent-light: #fbbf24;
-    --success: #10b981;
-    --danger: #ef4444;
-    --gray-50: #f8fafc;
-    --gray-100: #f1f5f9;
-    --gray-200: #e2e8f0;
-    --gray-300: #cbd5e1;
-    --gray-400: #94a3b8;
-    --gray-500: #64748b;
-    --gray-600: #475569;
-    --gray-700: #334155;
-    --gray-800: #1e293b;
-    --gray-900: #0f172a;
-    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-    --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
-    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
-    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
-    --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
-    --radius: 12px;
-    --radius-lg: 20px;
+    --navy-900: #0a1628;
+    --navy-800: #0f1d35;
+    --navy-700: #152642;
+    --navy-600: #1a3050;
+    --navy-500: #1e3a5f;
+    --blue-500: #3b82f6;
+    --blue-400: #60a5fa;
+    --blue-300: #93bbfc;
+    --blue-100: #dbeafe;
+    --slate-50: #f8fafc;
+    --slate-100: #f1f5f9;
+    --slate-200: #e2e8f0;
+    --slate-300: #cbd5e1;
+    --slate-400: #94a3b8;
+    --slate-500: #64748b;
+    --slate-600: #475569;
+    --slate-700: #334155;
+    --slate-800: #1e293b;
+    --slate-900: #0f172a;
+    --emerald-500: #10b981;
+    --emerald-600: #059669;
+    --amber-500: #f59e0b;
+    --rose-500: #f43f5e;
+    --violet-500: #8b5cf6;
+    --cyan-500: #06b6d4;
+    --radius: 8px;
+    --radius-lg: 12px;
   }
 
   body {
-    font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: var(--gray-50);
-    color: var(--gray-800);
-    line-height: 1.6;
-    overflow-x: hidden;
+    font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--slate-50);
+    color: var(--slate-800);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
   }
 
-  /* ─── Hero ─── */
-  .hero {
-    position: relative;
-    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
-    padding: 80px 24px 60px;
-    text-align: center;
+  /* ═══ Page Control ═══ */
+  .page-control {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    display: flex;
+    gap: 8px;
+    background: rgba(15,23,42,0.85);
+    backdrop-filter: blur(12px);
+    padding: 6px;
+    border-radius: 50px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  }
+  .page-btn {
+    padding: 10px 24px;
+    border: none;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: transparent;
+    color: rgba(255,255,255,0.5);
+    font-family: inherit;
+  }
+  .page-btn:hover { color: #fff; background: rgba(255,255,255,0.1); }
+  .page-btn.active {
+    background: var(--blue-500);
     color: #fff;
+    box-shadow: 0 4px 12px rgba(59,130,246,0.4);
+  }
+  .page-btn .page-num {
+    display: inline-block;
+    width: 20px; height: 20px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 11px;
+    margin-right: 6px;
+  }
+  .page-btn.active .page-num { background: rgba(255,255,255,0.2); }
+
+  /* ═══ Pages Container ═══ */
+  .pages-container {
+    position: relative;
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    background: #fff;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.08);
     overflow: hidden;
   }
-  .hero::before {
+  .page {
+    display: none;
+    padding: 0;
+    min-height: 297mm;
+    position: relative;
+  }
+  .page.active { display: block; }
+
+  @media print {
+    .page-control { display: none; }
+    .pages-container { box-shadow: none; width: 100%; }
+    .page { display: block !important; page-break-after: always; }
+    .page:last-child { page-break-after: auto; }
+  }
+
+  /* ═══ P1 Hero ═══ */
+  .p1-hero {
+    background: linear-gradient(135deg, var(--navy-900) 0%, var(--navy-700) 50%, #1e3a5f 100%);
+    padding: 64px 56px 48px;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .p1-hero::after {
     content: '';
     position: absolute;
-    inset: 0;
-    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    opacity: 0.4;
+    bottom: -40px; right: -40px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%);
   }
-  .hero * { position: relative; z-index: 1; }
-
-  .hero-badge {
+  .hero-label {
     display: inline-block;
-    padding: 4px 16px;
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(8px);
-    border-radius: 20px;
-    font-size: 13px;
-    letter-spacing: 0.5px;
-    margin-bottom: 20px;
-    border: 1px solid rgba(255,255,255,0.2);
-  }
-  .hero h1 {
-    font-size: 48px;
-    font-weight: 900;
-    letter-spacing: -1px;
-    margin-bottom: 8px;
-    background: linear-gradient(to right, #fff, #bfdbfe);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .hero .subtitle {
-    font-size: 18px;
-    font-weight: 300;
-    opacity: 0.9;
+    padding: 4px 14px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 4px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
     margin-bottom: 24px;
   }
-  .hero-meta {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    flex-wrap: wrap;
-    font-size: 14px;
-    opacity: 0.85;
-  }
-  .hero-meta span {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  /* ─── Container ─── */
-  .container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-
-  /* ─── Section ─── */
-  .section {
-    margin-top: 40px;
-    margin-bottom: 48px;
-  }
-  .section-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 24px;
-  }
-  .section-header .icon {
-    width: 36px; height: 36px;
-    border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 18px;
-  }
-  .section-header h2 {
-    font-size: 22px;
+  .p1-hero h1 {
+    font-size: 36px;
     font-weight: 700;
-    color: var(--gray-900);
-  }
-  .section-header p {
-    color: var(--gray-500);
-    font-size: 14px;
-    margin-left: auto;
-  }
-
-  /* ─── KPI Cards ─── */
-  .kpi-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 16px;
-    margin-bottom: 32px;
-  }
-  .kpi-card {
-    background: #fff;
-    border-radius: var(--radius);
-    padding: 24px;
-    box-shadow: var(--shadow);
-    border: 1px solid var(--gray-100);
-    transition: transform 0.2s, box-shadow 0.2s;
-    position: relative;
-    overflow: hidden;
-  }
-  .kpi-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-  }
-  .kpi-card .kpi-icon {
-    width: 40px; height: 40px;
-    border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 20px;
-    margin-bottom: 12px;
-  }
-  .kpi-card .kpi-value {
-    font-size: 32px;
-    font-weight: 800;
     letter-spacing: -0.5px;
+    margin-bottom: 4px;
+    color: #fff;
+  }
+  .p1-hero .sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.6);
+    font-weight: 300;
+    margin-bottom: 28px;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 32px;
+  }
+  .hero-stat {
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius);
+    padding: 16px;
+    background: rgba(255,255,255,0.03);
+  }
+  .hero-stat .num {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--blue-400);
     line-height: 1.2;
   }
-  .kpi-card .kpi-label {
-    font-size: 14px;
-    color: var(--gray-500);
-    margin-top: 4px;
-  }
-  .kpi-card .kpi-trend {
-    position: absolute;
-    top: 16px; right: 16px;
+  .hero-stat .lbl {
     font-size: 12px;
-    padding: 2px 10px;
-    border-radius: 12px;
-    background: var(--success);
-    color: #fff;
-  }
-  .kpi-card.blue  .kpi-icon { background: #dbeafe; color: #2563eb; }
-  .kpi-card.blue  .kpi-value { color: #1d4ed8; }
-  .kpi-card.green .kpi-icon { background: #d1fae5; color: #059669; }
-  .kpi-card.green .kpi-value { color: #047857; }
-  .kpi-card.amber .kpi-icon { background: #fef3c7; color: #d97706; }
-  .kpi-card.amber .kpi-value { color: #b45309; }
-  .kpi-card.purple .kpi-icon { background: #ede9fe; color: #7c3aed; }
-  .kpi-card.purple .kpi-value { color: #6d28d9; }
-  .kpi-card.rose .kpi-icon { background: #fce7f3; color: #e11d48; }
-  .kpi-card.rose .kpi-value { color: #be123c; }
-  .kpi-card.teal .kpi-icon { background: #ccfbf1; color: #0d9488; }
-  .kpi-card.teal .kpi-value { color: #0f766e; }
-
-  /* ─── Cards ─── */
-  .card {
-    background: #fff;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    border: 1px solid var(--gray-100);
-    overflow: hidden;
-  }
-  .card-body { padding: 28px; }
-
-  /* ─── Platform Bar Chart ─── */
-  .bar-chart { margin-top: 8px; }
-  .bar-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 12px;
-  }
-  .bar-label {
-    width: 180px;
-    font-size: 13px;
-    font-weight: 500;
-    text-align: right;
-    color: var(--gray-600);
-    flex-shrink: 0;
-  }
-  .bar-track {
-    flex: 1;
-    height: 28px;
-    background: var(--gray-100);
-    border-radius: 14px;
-    overflow: hidden;
-    position: relative;
-  }
-  .bar-fill {
-    height: 100%;
-    border-radius: 14px;
-    background: linear-gradient(90deg, var(--primary), #60a5fa);
-    transition: width 1s ease;
-    display: flex;
-    align-items: center;
-    padding-left: 12px;
-    font-size: 12px;
-    color: #fff;
-    font-weight: 500;
-    min-width: 0;
-  }
-  .bar-fill.sm { background: linear-gradient(90deg, #64748b, #94a3b8); }
-  .bar-value {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--gray-700);
-    width: 70px;
-    text-align: left;
-    flex-shrink: 0;
+    color: rgba(255,255,255,0.45);
+    margin-top: 2px;
   }
 
-  /* ─── Operation Type ─── */
-  .op-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 12px;
+  /* ═══ Content Area ═══ */
+  .content-area {
+    padding: 40px 56px 56px;
   }
-  .op-item {
-    background: #fff;
-    border: 1px solid var(--gray-200);
-    border-radius: 10px;
-    padding: 16px 20px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    transition: all 0.2s;
-  }
-  .op-item:hover {
-    border-color: var(--primary-light);
-    box-shadow: var(--shadow-sm);
-  }
-  .op-item .op-icon {
-    width: 40px; height: 40px;
-    border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
+
+  .section-title {
     font-size: 18px;
-    flex-shrink: 0;
-  }
-  .op-item .op-info { flex: 1; }
-  .op-item .op-info .op-name { font-weight: 600; font-size: 14px; }
-  .op-item .op-info .op-count { font-size: 22px; font-weight: 800; color: var(--gray-900); }
-  .op-item .op-info .op-sub { font-size: 12px; color: var(--gray-400); }
-
-  /* ─── Platform Table ─── */
-  .platform-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 12px;
-  }
-  .platform-card {
-    background: #fff;
-    border: 1px solid var(--gray-200);
-    border-radius: 10px;
-    padding: 18px 20px;
+    font-weight: 700;
+    color: var(--slate-900);
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--slate-100);
     display: flex;
     align-items: center;
-    gap: 14px;
-    transition: all 0.2s;
+    gap: 8px;
   }
-  .platform-card:hover {
-    border-color: var(--primary-light);
-    box-shadow: var(--shadow-sm);
-    transform: translateY(-1px);
-  }
-  .platform-card .p-icon {
-    width: 36px; height: 36px;
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 16px;
-    flex-shrink: 0;
-  }
-  .platform-card .p-info { flex: 1; }
-  .platform-card .p-info .p-name { font-weight: 600; font-size: 14px; }
-  .platform-card .p-info .p-count { font-size: 13px; color: var(--gray-500); }
-  .platform-card .p-bar {
-    width: 80px; height: 6px;
-    background: var(--gray-100);
-    border-radius: 3px;
-    overflow: hidden;
-    flex-shrink: 0;
-  }
-  .platform-card .p-bar .p-fill {
-    height: 100%;
-    border-radius: 3px;
-    background: linear-gradient(90deg, var(--primary), #60a5fa);
+  .section-title .badge {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 10px;
+    border-radius: 4px;
+    margin-left: 8px;
   }
 
-  /* ─── Responsibility ─── */
-  .resp-grid {
+  /* ═══ KPI Row ═══ */
+  .kpi-row {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 28px;
   }
-  .resp-card {
-    background: #fff;
-    border: 1px solid var(--gray-200);
+  .kpi-box {
+    border: 1px solid var(--slate-200);
     border-radius: var(--radius);
-    padding: 24px;
-    transition: all 0.25s;
-    position: relative;
-  }
-  .resp-card:hover {
-    box-shadow: var(--shadow-md);
-    border-color: var(--primary-light);
-  }
-  .resp-card .r-icon {
-    width: 44px; height: 44px;
-    border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 22px;
-    margin-bottom: 14px;
-  }
-  .resp-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
-  .resp-card p { font-size: 13px; color: var(--gray-500); line-height: 1.7; }
-  .resp-card .r-badge {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 2px 12px;
-    border-radius: 10px;
-    font-size: 12px;
-    font-weight: 600;
-  }
-
-  /* ─── Data Source Footer ─── */
-  .source-note {
+    padding: 16px;
     background: #fff;
-    border: 1px solid var(--gray-200);
-    border-radius: var(--radius);
-    padding: 20px 24px;
+  }
+  .kpi-box .kpi-top {
     display: flex;
     align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 4px;
+  }
+  .kpi-box .kpi-val {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--slate-900);
+    line-height: 1.1;
+  }
+  .kpi-box .kpi-icon { font-size: 18px; opacity: 0.6; }
+  .kpi-box .kpi-lbl { font-size: 12px; color: var(--slate-500); }
+  .kpi-box .kpi-sub { font-size: 11px; color: var(--slate-400); margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--slate-100); }
+
+  /* ═══ Section Block ═══ */
+  .block {
+    margin-bottom: 32px;
+  }
+  .block h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--slate-700);
+    margin-bottom: 10px;
+  }
+  .block p, .block li {
+    font-size: 13px;
+    color: var(--slate-600);
+    line-height: 1.8;
+  }
+
+  .stat-list { list-style: none; }
+  .stat-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--slate-100);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--slate-600);
+  }
+  .stat-list li:last-child { border-bottom: none; }
+  .stat-list li .label { font-weight: 500; color: var(--slate-800); min-width: 100px; flex-shrink: 0; }
+  .stat-list li .marker { color: var(--blue-500); }
+
+  /* ═══ Highlight / Issue Cards ═══ */
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 12px;
-    font-size: 13px;
-    color: var(--gray-500);
-    margin-top: 40px;
   }
-  .source-note strong { color: var(--gray-700); }
-
-  /* ─── Timeline ─── */
-  .timeline {
-    position: relative;
-    padding: 20px 0;
-  }
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 23px; top: 0; bottom: 0;
-    width: 2px;
-    background: var(--gray-200);
-  }
-  .tl-item {
-    position: relative;
-    padding-left: 60px;
-    margin-bottom: 24px;
-  }
-  .tl-item:last-child { margin-bottom: 0; }
-  .tl-dot {
-    position: absolute;
-    left: 14px; top: 4px;
-    width: 20px; height: 20px;
-    border-radius: 50%;
-    border: 3px solid var(--primary);
+  .highlight-card {
+    border: 1px solid var(--slate-200);
+    border-radius: var(--radius);
+    padding: 16px;
     background: #fff;
   }
-  .tl-item .tl-date {
+  .highlight-card .h-icon {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+  .highlight-card h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--slate-800);
+    margin-bottom: 4px;
+  }
+  .highlight-card p {
     font-size: 12px;
-    color: var(--gray-400);
+    color: var(--slate-500);
+    line-height: 1.7;
+  }
+  .highlight-card .tag {
+    display: inline-block;
+    font-size: 10px;
+    padding: 1px 8px;
+    border-radius: 3px;
     font-weight: 500;
-    margin-bottom: 2px;
+    margin-top: 8px;
   }
-  .tl-item .tl-content {
-    background: #fff;
-    border: 1px solid var(--gray-200);
-    border-radius: 8px;
-    padding: 12px 16px;
+
+  .issue-card {
+    border: 1px solid #fecaca;
+    border-radius: var(--radius);
+    padding: 16px;
+    background: #fffbfb;
+  }
+  .issue-card .i-icon { font-size: 14px; margin-bottom: 6px; }
+  .issue-card h4 { font-size: 13px; font-weight: 600; color: #991b1b; margin-bottom: 4px; }
+  .issue-card p { font-size: 12px; color: #7f1d1d; line-height: 1.7; }
+
+  /* ═══ Platform Bar (compact) ═══ */
+  .bar-compact { margin: 4px 0 16px; }
+  .bar-row-c {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    font-size: 12px;
+  }
+  .bar-row-c .bl { width: 80px; text-align: right; color: var(--slate-500); flex-shrink: 0; font-size: 11px; }
+  .bar-row-c .bt {
+    flex: 1; height: 6px;
+    background: var(--slate-100);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .bar-row-c .bt .bf {
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--blue-500), var(--blue-400));
+  }
+  .bar-row-c .bv { color: var(--slate-600); font-weight: 600; width: 50px; font-size: 11px; }
+
+  /* ═══ P2 Hero ═══ */
+  .p2-hero {
+    background: linear-gradient(135deg, #0c1a2e 0%, #1a2d49 50%, #0f1d35 100%);
+    padding: 48px 56px 36px;
+    color: #fff;
+    position: relative;
+  }
+  .p2-hero h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    color: #fff;
+  }
+  .p2-hero .sub {
     font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 4px;
   }
-  .tl-item .tl-content strong { color: var(--gray-800); }
 
-  /* ─── Footer ─── */
-  .footer {
-    text-align: center;
-    padding: 40px 24px;
-    color: var(--gray-400);
+  /* ═══ Tech Stack Tags ═══ */
+  .tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 12px 0 20px;
+  }
+  .tech-tag {
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    background: var(--slate-100);
+    color: var(--slate-600);
+  }
+  .tech-tag.blue { background: #dbeafe; color: #1d4ed8; }
+  .tech-tag.green { background: #d1fae5; color: #047857; }
+  .tech-tag.violet { background: #ede9fe; color: #6d28d9; }
+  .tech-tag.amber { background: #fef3c7; color: #92400e; }
+
+  /* ═══ Skill Tags ═══ */
+  .skill-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--slate-100);
+  }
+  .skill-item:last-child { border-bottom: none; }
+  .skill-item .s-name {
     font-size: 13px;
-    border-top: 1px solid var(--gray-200);
-    margin-top: 60px;
+    font-weight: 600;
+    color: var(--slate-800);
+    min-width: 140px;
+  }
+  .skill-item .s-desc { font-size: 12px; color: var(--slate-500); flex: 1; }
+  .skill-item .s-stat { font-size: 11px; color: var(--slate-400); white-space: nowrap; }
+
+  /* ═══ Plan List ═══ */
+  .plan-list { list-style: none; }
+  .plan-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--slate-100);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--slate-600);
+  }
+  .plan-list li:last-child { border-bottom: none; }
+  .plan-list li .pnum {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--slate-100);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 600;
+    color: var(--slate-500);
+    flex-shrink: 0;
+    margin-top: 1px;
   }
 
-  /* ─── Responsive ─── */
-  @media (max-width: 768px) {
-    .hero h1 { font-size: 32px; }
-    .hero-meta { gap: 16px; flex-direction: column; align-items: center; }
-    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
-    .bar-label { width: 100px; font-size: 12px; }
-    .resp-grid { grid-template-columns: 1fr; }
-    .platform-grid { grid-template-columns: 1fr; }
-    .bar-value { width: 50px; font-size: 12px; }
+  /* ═══ Responsive ═══ */
+  @media (max-width: 800px) {
+    .pages-container { width: 100%; }
+    .p1-hero { padding: 32px 24px; }
+    .content-area { padding: 24px; }
+    .hero-grid { grid-template-columns: repeat(2, 1fr); }
+    .kpi-row { grid-template-columns: repeat(2, 1fr); }
+    .card-grid { grid-template-columns: 1fr; }
+    .p2-hero { padding: 32px 24px; }
   }
-
-  /* ─── Animations ─── */
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .animate { animation: fadeInUp 0.6s ease forwards; opacity: 0; }
-  .d1 { animation-delay: 0.1s; }
-  .d2 { animation-delay: 0.2s; }
-  .d3 { animation-delay: 0.3s; }
-  .d4 { animation-delay: 0.4s; }
-  .d5 { animation-delay: 0.5s; }
-  .d6 { animation-delay: 0.6s; }
 </style>
 </head>
 <body>
 
-<!-- ═══ HERO ═══ -->
-<section class="hero">
-  <div class="hero-badge">🎯 2026 年度工作总结</div>
-  <h1>张淼</h1>
-  <p class="subtitle">数据运营 · 数据集市平台 · 数字化建设</p>
-  <div class="hero-meta">
-    <span>📋 工号 238415</span>
-    <span>📅 报告周期 2026.01 — 2026.06</span>
-    <span>📊 数据来源 数据集市 · 明道云日志</span>
-  </div>
-</section>
+<!-- ═══ Page Control ═══ -->
+<div class="page-control">
+  <button class="page-btn active" onclick="showPage(1)">
+    <span class="page-num">1</span> 数据集市运营
+  </button>
+  <button class="page-btn" onclick="showPage(2)">
+    <span class="page-num">2</span> AI 赋能实践
+  </button>
+</div>
 
-<div class="container">
+<div class="pages-container" id="app">
 
-<!-- ═══ KPI 看板 ═══ -->
-<section class="section animate d1">
-  <div class="section-header">
-    <div class="icon" style="background:#dbeafe;color:#2563eb;">📊</div>
-    <h2>年度关键指标</h2>
-    <p>2026年1月 - 6月 数据集市运营全景</p>
-  </div>
-  <div class="kpi-grid">
-    <div class="kpi-card blue">
-      <div class="kpi-icon">👀</div>
-      <div class="kpi-value">31,830</div>
-      <div class="kpi-label">总平台操作次数</div>
-    </div>
-    <div class="kpi-card green">
-      <div class="kpi-icon">📋</div>
-      <div class="kpi-value">1,852</div>
-      <div class="kpi-label">数据创建申请处理</div>
-    </div>
-    <div class="kpi-card amber">
-      <div class="kpi-icon">💬</div>
-      <div class="kpi-value">1,724</div>
-      <div class="kpi-label">数据咨询申请响应</div>
-    </div>
-    <div class="kpi-card purple">
-      <div class="kpi-icon">🔑</div>
-      <div class="kpi-value">1,428</div>
-      <div class="kpi-label">数据使用申请审批</div>
-    </div>
-    <div class="kpi-card rose">
-      <div class="kpi-icon">📚</div>
-      <div class="kpi-value">813</div>
-      <div class="kpi-label">资产目录维护</div>
-    </div>
-    <div class="kpi-card teal">
-      <div class="kpi-icon">🛡️</div>
-      <div class="kpi-value">440</div>
-      <div class="kpi-label">BI权限审批</div>
-    </div>
-  </div>
-</section>
+<!-- ══════════════════════════════════════════════════════════ -->
+<!--  PAGE 1: 数据集市运营 -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="page active" id="page1">
 
-<!-- ═══ 操作类型分布 ═══ -->
-<section class="section animate d2">
-  <div class="section-header">
-    <div class="icon" style="background:#fef3c7;color:#d97706;">⚡</div>
-    <h2>操作行为分布</h2>
-    <p>数据集市平台全年操作类型</p>
-  </div>
-  <div class="op-grid">
-    <div class="op-item">
-      <div class="op-icon" style="background:#dbeafe;color:#2563eb;">👀</div>
-      <div class="op-info">
-        <div class="op-count">28,717</div>
-        <div class="op-name">浏览 / 查询</div>
-        <div class="op-sub">日常数据审核与检索</div>
-      </div>
-    </div>
-    <div class="op-item">
-      <div class="op-icon" style="background:#fef3c7;color:#d97706;">✏️</div>
-      <div class="op-info">
-        <div class="op-count">3,507</div>
-        <div class="op-name">更新 / 编辑</div>
-        <div class="op-sub">工单处理与记录修改</div>
-      </div>
-    </div>
-    <div class="op-item">
-      <div class="op-icon" style="background:#d1fae5;color:#059669;">⚡</div>
-      <div class="op-info">
-        <div class="op-count">331</div>
-        <div class="op-name">自定义动作</div>
-        <div class="op-sub">创建/更新 数据工作流</div>
-      </div>
-    </div>
-    <div class="op-item">
-      <div class="op-icon" style="background:#ede9fe;color:#7c3aed;">➕</div>
-      <div class="op-info">
-        <div class="op-count">49</div>
-        <div class="op-name">新增记录</div>
-        <div class="op-sub">新数据接入</div>
-      </div>
-    </div>
-    <div class="op-item">
-      <div class="op-icon" style="background:#fce7f3;color:#e11d48;">🗑️</div>
-      <div class="op-info">
-        <div class="op-count">31</div>
-        <div class="op-name">删除清理</div>
-        <div class="op-sub">数据治理维护</div>
-      </div>
-    </div>
-  </div>
-</section>
+  <div class="p1-hero">
+    <div class="hero-label">2026 半年度工作总结</div>
+    <h1>数据集市运营报告</h1>
+    <p class="sub">张淼 · 工号 238415 · 数据运营管理</p>
 
-<!-- ═══ 核心职责 ═══ -->
-<section class="section animate d3">
-  <div class="section-header">
-    <div class="icon" style="background:#ccfbf1;color:#0d9488;">🎯</div>
-    <h2>核心工作职责</h2>
-    <p>数据集市运营 · 数据资产管理 · 数字化支撑</p>
-  </div>
-  <div class="resp-grid">
-    <div class="resp-card">
-      <div class="r-icon" style="background:#dbeafe;color:#2563eb;">🏛️</div>
-      <h3>数据集市运营管理</h3>
-      <p>作为数据集市平台核心运营人员，负责全流程数据需求管理：从数据创建申请（1,852次）、咨询申请（1,724次）到数据使用审批（1,428次），保障数据流通通道高效运转。</p>
-      <span class="r-badge" style="background:#dbeafe;color:#1d4ed8;">核心职责</span>
-    </div>
-    <div class="resp-card">
-      <div class="r-icon" style="background:#fef3c7;color:#d97706;">📚</div>
-      <h3>数据资产目录建设</h3>
-      <p>持续维护数据资产目录（813次），执行资产审核流程（58次），确保数据资产规范上架、分类清晰，提升数据可查找性与可理解性，推动数据资产化进程。</p>
-      <span class="r-badge" style="background:#fef3c7;color:#b45309;">数据治理</span>
-    </div>
-    <div class="resp-card">
-      <div class="r-icon" style="background:#ede9fe;color:#7c3aed;">🛡️</div>
-      <h3>BI权限与安全管理</h3>
-      <p>负责BI权限的申请审批与明细管理（440次），确保数据使用合规、权限合理分配，平衡数据开放与安全管控。</p>
-      <span class="r-badge" style="background:#ede9fe;color:#6d28d9;">安全管控</span>
-    </div>
-    <div class="resp-card">
-      <div class="r-icon" style="background:#d1fae5;color:#059669;">⚙️</div>
-      <h3>质量体系数字化支撑</h3>
-      <p>深入支撑QMS质量管理体系数字化建设，覆盖零部件检验（41次）、6Sigma课题/认证（62次）、整车排查记录（24次）等多个质量业务模块的数据管理与系统维护。</p>
-      <span class="r-badge" style="background:#d1fae5;color:#047857;">业务支撑</span>
-    </div>
-    <div class="resp-card">
-      <div class="r-icon" style="background:#fce7f3;color:#e11d48;">🤖</div>
-      <h3>AI与创新改善推进</h3>
-      <p>参与AI项目管理与创新价值改善工作，推动整车管理系统中的合理化建议与改善提案的数据化闭环管理，助力智能化转型。</p>
-      <span class="r-badge" style="background:#fce7f3;color:#be123c;">创新驱动</span>
-    </div>
-    <div class="resp-card">
-      <div class="r-icon" style="background:#e0f2fe;color:#0284c7;">🔗</div>
-      <h3>跨系统业务协同</h3>
-      <p>覆盖一致性业务管理（429次）、IQ现场管理（310次）、数智化项目（194次）、整车管理（143次）、索赔台账等多个业务系统，打通数据孤岛，实现业务协同。</p>
-      <span class="r-badge" style="background:#e0f2fe;color:#0369a1;">协同整合</span>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ 平台分布 ═══ -->
-<section class="section animate d4">
-  <div class="section-header">
-    <div class="icon" style="background:#e0e7ff;color:#4338ca;">💻</div>
-    <h2>平台活跃度全景</h2>
-    <p>跨平台工作覆盖 — 全年操作分布</p>
-  </div>
-  <div class="card">
-    <div class="card-body">
-      <div class="bar-chart">
-        <div class="bar-row">
-          <span class="bar-label">数据集市</span>
-          <div class="bar-track">
-            <div class="bar-fill" style="width:100%">31,830</div>
-          </div>
-          <span class="bar-value">100%</span>
-        </div>
-        <div class="bar-row">
-          <span class="bar-label">数字工具问题需求工单</span>
-          <div class="bar-track">
-            <div class="bar-fill" style="width:2%"></div>
-          </div>
-          <span class="bar-value">565</span>
-        </div>
-        <div class="bar-row">
-          <span class="bar-label">一致性业务管理</span>
-          <div class="bar-track">
-            <div class="bar-fill" style="width:1.4%"></div>
-          </div>
-          <span class="bar-value">429</span>
-        </div>
-        <div class="bar-row">
-          <span class="bar-label">IQ现场管理</span>
-          <div class="bar-track">
-            <div class="bar-fill" style="width:1%"></div>
-          </div>
-          <span class="bar-value">310</span>
-        </div>
-        <div class="bar-row">
-          <span class="bar-label">数智化项目管理</span>
-          <div class="bar-track">
-            <div class="bar-fill" style="width:0.6%"></div>
-          </div>
-          <span class="bar-value">194</span>
-        </div>
-        <div class="bar-row">
-          <span class="bar-label">质量工具推进平台</span>
-          <div class="bar-track">
-            <div class="bar-fill" style="width:0.5%"></div>
-          </div>
-          <span class="bar-value">176</span>
-        </div>
-        <div class="bar-row">
-          <span class="bar-label">整车管理系统</span>
-          <div class="bar-track">
-            <div class="bar-fill" style="width:0.45%"></div>
-          </div>
-          <span class="bar-value">143</span>
-        </div>
+    <div class="hero-grid">
+      <div class="hero-stat">
+        <div class="num">31,830</div>
+        <div class="lbl">平台总操作次数</div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ 平台详情列表 ═══ -->
-<section class="section animate d5">
-  <div class="section-header">
-    <div class="icon" style="background:#f0fdf4;color:#16a34a;">📱</div>
-    <h2>涉足平台一览</h2>
-    <p>全面覆盖的数字化工作矩阵</p>
-  </div>
-  <div class="platform-grid">
-    <div class="platform-card">
-      <div class="p-icon" style="background:#dbeafe;color:#2563eb;">🏛️</div>
-      <div class="p-info">
-        <div class="p-name">数据集市</div>
-        <div class="p-count">31,830 次</div>
+      <div class="hero-stat">
+        <div class="num">1,852</div>
+        <div class="lbl">数据创建申请处理</div>
       </div>
-      <div class="p-bar"><div class="p-fill" style="width:100%"></div></div>
-    </div>
-    <div class="platform-card">
-      <div class="p-icon" style="background:#fef3c7;color:#d97706;">📋</div>
-      <div class="p-info">
-        <div class="p-name">数字工具问题需求工单</div>
-        <div class="p-count">565 次</div>
+      <div class="hero-stat">
+        <div class="num">1,724</div>
+        <div class="lbl">数据咨询申请响应</div>
       </div>
-      <div class="p-bar"><div class="p-fill" style="width:18%"></div></div>
-    </div>
-    <div class="platform-card">
-      <div class="p-icon" style="background:#ede9fe;color:#7c3aed;">🔄</div>
-      <div class="p-info">
-        <div class="p-name">一致性业务管理系统</div>
-        <div class="p-count">429 次</div>
+      <div class="hero-stat">
+        <div class="num">1,428</div>
+        <div class="lbl">数据使用申请审批</div>
       </div>
-      <div class="p-bar"><div class="p-fill" style="width:13%"></div></div>
-    </div>
-    <div class="platform-card">
-      <div class="p-icon" style="background:#d1fae5;color:#059669;">🏗️</div>
-      <div class="p-info">
-        <div class="p-name">IQ现场管理系统</div>
-        <div class="p-count">310 次</div>
-      </div>
-      <div class="p-bar"><div class="p-fill" style="width:10%"></div></div>
-    </div>
-    <div class="platform-card">
-      <div class="p-icon" style="background:#fce7f3;color:#e11d48;">📊</div>
-      <div class="p-info">
-        <div class="p-name">数智化项目管理</div>
-        <div class="p-count">194 次</div>
-      </div>
-      <div class="p-bar"><div class="p-fill" style="width:6%"></div></div>
-    </div>
-    <div class="platform-card">
-      <div class="p-icon" style="background:#e0f2fe;color:#0284c7;">🔧</div>
-      <div class="p-info">
-        <div class="p-name">质量工具推进平台</div>
-        <div class="p-count">176 次</div>
-      </div>
-      <div class="p-bar"><div class="p-fill" style="width:6%"></div></div>
-    </div>
-    <div class="platform-card">
-      <div class="p-icon" style="background:#f0fdf4;color:#16a34a;">🚗</div>
-      <div class="p-info">
-        <div class="p-name">整车管理系统</div>
-        <div class="p-count">143 次</div>
-      </div>
-      <div class="p-bar"><div class="p-fill" style="width:4%"></div></div>
-    </div>
-    <div class="platform-card">
-      <div class="p-icon" style="background:#fff7ed;color:#ea580c;">📑</div>
-      <div class="p-info">
-        <div class="p-name">AITO线下索赔数据台账</div>
-        <div class="p-count">76 次</div>
-      </div>
-      <div class="p-bar"><div class="p-fill" style="width:2%"></div></div>
-    </div>
-    <div class="platform-card">
-      <div class="p-icon" style="background:#f5f3ff;color:#6b21a8;">👥</div>
-      <div class="p-info">
-        <div class="p-name">岗位定编管理</div>
-        <div class="p-count">84 次</div>
-      </div>
-      <div class="p-bar"><div class="p-fill" style="width:3%"></div></div>
-    </div>
-    <div class="platform-card">
-      <div class="p-icon" style="background:#fdf2f8;color:#9d174d;">🧪</div>
-      <div class="p-info">
-        <div class="p-name">部件实验&专项业务</div>
-        <div class="p-count">17 次</div>
-      </div>
-      <div class="p-bar"><div class="p-fill" style="width:0.5%"></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ 时间线 ═══ -->
-<section class="section animate d6">
-  <div class="section-header">
-    <div class="icon" style="background:#fef2f2;color:#dc2626;">📅</div>
-    <h2>关键业务轨迹</h2>
-    <p>2026年上半年高价值工作事项</p>
-  </div>
-  <div class="card">
-    <div class="card-body">
-      <div class="timeline">
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-date">2026年1月 - 6月 · 持续</div>
-          <div class="tl-content">
-            <strong>📋 数据集市日常运营</strong> — 日均处理数据创建申请、咨询申请、使用申请近30条，保障数据需求高效响应
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-date">2026年1月 - 6月 · 持续</div>
-          <div class="tl-content">
-            <strong>📚 数据资产目录建设</strong> — 维护813次资产目录，推动58次资产审核流程，夯实数据资产化管理基础
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-date">2026年1月 - 6月 · 持续</div>
-          <div class="tl-content">
-            <strong>🛡️ BI权限管理</strong> — 完成440次BI权限申请审批，确保数据使用安全合规
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-date">2026年1月 - 6月 · 持续</div>
-          <div class="tl-content">
-            <strong>⚙️ 质量体系数字化支撑</strong> — 支撑QMS质量管理系统，覆盖6Sigma课题/认证、零部件检验、整车排查等多业务场景
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-date">2026年1月 - 6月 · 持续</div>
-          <div class="tl-content">
-            <strong>🔗 跨平台业务协同</strong> — 深入运营10+业务系统（一致性管理、IQ现场、数智化项目、整车管理、索赔台账等）
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-date">2026年6月</div>
-          <div class="tl-content">
-            <strong>🤖 AI辅助办公探索</strong> — 利用Claude AI辅助进行年终总结数据分析与报告生成，探索AI在数据运营中的应用场景
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ AI 辅助工作 ═══ -->
-<section class="section animate d6">
-  <div class="section-header">
-    <div class="icon" style="background:#f0f9ff;color:#0369a1;">🤖</div>
-    <h2>AI 辅助工作实践</h2>
-    <p>大模型技术在数据运营中的深度应用</p>
-  </div>
-
-  <!-- AI KPI -->
-  <div class="kpi-grid" style="margin-bottom:20px;">
-    <div class="kpi-card" style="border-left:4px solid #0284c7;">
-      <div class="kpi-icon" style="background:#e0f2fe;color:#0284c7;">🧠</div>
-      <div class="kpi-value">6+</div>
-      <div class="kpi-label">AI 技能/工具沉淀</div>
-    </div>
-    <div class="kpi-card" style="border-left:4px solid #7c3aed;">
-      <div class="kpi-icon" style="background:#ede9fe;color:#7c3aed;">📜</div>
-      <div class="kpi-value">20+</div>
-      <div class="kpi-label">知识记忆条目管理</div>
-    </div>
-    <div class="kpi-card" style="border-left:4px solid #ea580c;">
-      <div class="kpi-icon" style="background:#fff7ed;color:#ea580c;">⚡</div>
-      <div class="kpi-value">3</div>
-      <div class="kpi-label">可复用技能封装</div>
-    </div>
-    <div class="kpi-card" style="border-left:4px solid #059669;">
-      <div class="kpi-icon" style="background:#d1fae5;color:#059669;">🔗</div>
-      <div class="kpi-value">1</div>
-      <div class="kpi-label">自动化部署流水线</div>
     </div>
   </div>
 
-  <div class="resp-grid">
-    <div class="resp-card" style="border-left:4px solid #0284c7;">
-      <div class="r-icon" style="background:#e0f2fe;color:#0284c7;">🏗️</div>
-      <h3>数据工程 — SQL 自动化生成</h3>
-      <p>利用 AI 自动生成 StarRocks 的 ODS → ADS 层建表 SQL 和 ETL 脚本，覆盖明道云表单到数据仓库的全链路。通过沉淀 <strong>mdy-to-starrocks-ddl</strong> 技能，将字段命名规范化、JSON 解析模板化、表备注标准化，避免了大量重复性手工编写工作。</p>
-      <span class="r-badge" style="background:#e0f2fe;color:#0369a1;">核心场景</span>
-    </div>
-    <div class="resp-card" style="border-left:4px solid #7c3aed;">
-      <div class="r-icon" style="background:#ede9fe;color:#7c3aed;">📖</div>
-      <h3>知识管理 — Denodo 知识库构建</h3>
-      <p>系统性整理了 Denodo 数据集市平台的完整知识体系，涵盖：架构基础、VQL 语法、日期时间函数、视图与 Wrapper、缓存优化、安全权限、Scheduler 调度、9.1 新功能及最佳实践，形成了 <strong>10+ 篇知识记忆</strong>，构建了可复用的 Denodo 知识库。</p>
-      <span class="r-badge" style="background:#ede9fe;color:#6d28d9;">知识沉淀</span>
-    </div>
-    <div class="resp-card" style="border-left:4px solid #ea580c;">
-      <div class="r-icon" style="background:#fff7ed;color:#ea580c;">⚙️</div>
-      <h3>自动化 — 可复用技能封装</h3>
-      <p>将高频工作场景封装为 AI 可调用的技能脚本，目前已完成 <strong>3 个技能</strong>的沉淀：
-        <br><strong>①</strong> <code>mdy-to-starrocks-ddl</code> — SQL 一键生成
-        <br><strong>②</strong> <code>deploy-to-ghpages</code> — HTML 自动部署到 GitHub Pages
-        <br><strong>③</strong> 持续积累中...</p>
-      <span class="r-badge" style="background:#fff7ed;color:#c2410c;">提效工具</span>
-    </div>
-    <div class="resp-card" style="border-left:4px solid #059669;">
-      <div class="r-icon" style="background:#d1fae5;color:#059669;">🤝</div>
-      <h3>人机协作 — Agentic 工作流</h3>
-      <p>探索了多种 AI 协作模式：
-        <br>• <strong>MCP 工具调用</strong>：AI 直接操作 Denodo 数据集市、HAP 明道云等企业系统，完成数据查询和业务操作
-        <br>• <strong>记忆反馈机制</strong>：通过记忆系统持久化工作规范，使 AI 行为随协作持续优化
-        <br>• <strong>报告自动化</strong>：AI 自动从数据源提取数据、生成前端展示页面、部署公共链接</p>
-      <span class="r-badge" style="background:#d1fae5;color:#047857;">创新实践</span>
-    </div>
-    <div class="resp-card" style="border-left:4px solid #d97706;">
-      <div class="r-icon" style="background:#fef3c7;color:#d97706;">💡</div>
-      <h3>规范治理 — 最佳实践固化</h3>
-      <p>通过 AI 辅助梳理和固化多项工作规范，包括：明道云→StarRocks 字段命名全小写规范、MCP 服务器前缀命名规范、工作表编辑字段全属性传递规则、HAP 系统间数据流转规范等，将经验沉淀为可复用、可传承的标准。</p>
-      <span class="r-badge" style="background:#fef3c7;color:#92400e;">治理沉淀</span>
-    </div>
-    <div class="resp-card" style="border-left:4px solid #db2777;">
-      <div class="r-icon" style="background:#fce7f3;color:#db2777;">🚀</div>
-      <h3>效能提升 — 数据量化</h3>
-      <p>• SQL 编写效率提升 <strong>~70%</strong>（AI 自动生成模板化代码）
-        <br>• 知识检索效率提升 <strong>~60%</strong>（记忆系统快速召回）
-        <br>• 报告生成从 <strong>天级 → 分钟级</strong>（从数据提取到页面部署全链路 AI 驱动）
-        <br>• 技能复用使重复工作 <strong>一键完成</strong></p>
-      <span class="r-badge" style="background:#fce7f3;color:#9d174d;">效能数据</span>
-    </div>
-  </div>
-</section>
+  <div class="content-area">
 
-<!-- ═══ 数据源说明 ═══ -->
-<div class="source-note">
-  <span style="font-size:20px;">📌</span>
-  <div>
-    <strong>数据说明</strong><br>
-    本报告数据来源于<strong>数据集市（明道云操作日志）</strong>及<strong>AI 协作记忆系统</strong>，统计周期为2026年1月1日至2026年6月26日。<br>
-    数据集市数据通过 <strong>Denodo aito_im 数据集市 MCP</strong> 进行查询分析，涵盖 ads_im_mdy_log 视图中的操作记录。<br>
-    AI 使用数据来源于 Claude AI 记忆系统沉淀的知识条目与技能注册记录。<br>
-    部分数据为上半年阶段性统计，全年数据待年底汇总更新。
+    <!-- KPI Row -->
+    <div class="kpi-row">
+      <div class="kpi-box">
+        <div class="kpi-top">
+          <span class="kpi-val">813</span>
+          <span class="kpi-icon">📚</span>
+        </div>
+        <div class="kpi-lbl">资产目录维护</div>
+        <div class="kpi-sub">表资产上架与更新</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-top">
+          <span class="kpi-val">440</span>
+          <span class="kpi-icon">🔑</span>
+        </div>
+        <div class="kpi-lbl">BI 权限审批</div>
+        <div class="kpi-sub">权限申请与明细管理</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-top">
+          <span class="kpi-val">58</span>
+          <span class="kpi-icon">✅</span>
+        </div>
+        <div class="kpi-lbl">资产审核流程</div>
+        <div class="kpi-sub">数据资产上架审核</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-top">
+          <span class="kpi-val">3,507</span>
+          <span class="kpi-icon">✏️</span>
+        </div>
+        <div class="kpi-lbl">更新/编辑操作</div>
+        <div class="kpi-sub">工单处理 · 记录维护</div>
+      </div>
+    </div>
+
+    <!-- 职责概述 -->
+    <div class="section-title">📋 核心职责与工作成效</div>
+
+    <ul class="stat-list">
+      <li>
+        <span class="marker">▸</span>
+        <span class="label">数据需求管理</span>
+        <span>全流程处理数据创建申请（1,852次）、咨询申请（1,724次）、使用申请（1,428次），日均处理约30条需求，保障数据通道高效运转</span>
+      </li>
+      <li>
+        <span class="marker">▸</span>
+        <span class="label">资产目录运营</span>
+        <span>持续维护数据集市资产目录（813次），执行资产审核流程（58次），推动数据资产规范上架与分类管理</span>
+      </li>
+      <li>
+        <span class="marker">▸</span>
+        <span class="label">权限安全管控</span>
+        <span>负责 BI 权限申请审批及明细管理（440次），确保数据使用合规、权限合理分配</span>
+      </li>
+      <li>
+        <span class="marker">▸</span>
+        <span class="label">数据治理运维</span>
+        <span>完成数据资产的新增（49次）、更新（3,507次）及清理（31次），维护数据质量与一致性</span>
+      </li>
+      <li>
+        <span class="marker">▸</span>
+        <span class="label">质量体系支撑</span>
+        <span>支撑 QMS 质量管理系统数据流转，覆盖零部件检验、6Sigma 课题/认证、整车排查等多业务</span>
+      </li>
+    </ul>
+
+    <!-- 亮点 -->
+    <div class="section-title"><span>⭐ 工作亮点</span></div>
+
+    <div class="card-grid">
+      <div class="highlight-card">
+        <div class="h-icon" style="background:#dbeafe;">🏆</div>
+        <h4>高需求响应能力</h4>
+        <p>上半年累计处理各类数据需求 5,004+ 条，日均处理量约30条，实现了需求响应的及时性和准确性，未发生因数据审批延误导致的业务中断事件</p>
+        <span class="tag" style="background:#dbeafe;color:#1d4ed8;">效率标杆</span>
+      </div>
+      <div class="highlight-card">
+        <div class="h-icon" style="background:#d1fae5;">📊</div>
+        <h4>数据资产化推动</h4>
+        <p>主动维护资产目录813次，推动58次审核流程，将散落的业务数据转化为可查找、可理解、可使用的数据资产，提升了数据平台的易用性和业务自助分析能力</p>
+        <span class="tag" style="background:#d1fae5;color:#047857;">资产沉淀</span>
+      </div>
+      <div class="highlight-card">
+        <div class="h-icon" style="background:#fef3c7;">🔄</div>
+        <h4>跨部门数据协同</h4>
+        <p>打通数据集市与质量管理系统、整车管理、索赔台账等业务系统的数据流转，消除数据孤岛，促进业务部门间的数据共享与协作</p>
+        <span class="tag" style="background:#fef3c7;color:#92400e;">协同整合</span>
+      </div>
+      <div class="highlight-card">
+        <div class="h-icon" style="background:#ede9fe;">🤖</div>
+        <h4>AI 赋能提效</h4>
+        <p>引入 AI 工具辅助完成数据查询、报告生成、SQL 编写等工作，将重复性工作的处理时间从天级压缩至分钟级，显著提升运营效率</p>
+        <span class="tag" style="background:#ede9fe;color:#6d28d9;">创新驱动</span>
+      </div>
+    </div>
+
+    <!-- 当前问题 -->
+    <div class="section-title"><span>⚠️ 当前存在的问题</span></div>
+
+    <div class="card-grid">
+      <div class="issue-card">
+        <div class="i-icon">📄</div>
+        <h4>表资产格式规范性不足</h4>
+        <p>部分业务表资产的字段命名存在中英文混用、大小写不统一、命名不规范的情况，影响下游报表开发和数据分析的准确性。需建立统一的字段命名规范并推动存量整改。</p>
+      </div>
+      <div class="issue-card">
+        <div class="i-icon">🔍</div>
+        <h4>数据质量参差不齐</h4>
+        <p>部分数据源表存在空值率高、数据口径不一致、重复记录等问题，直接影响数据使用方的信任度和决策质量。缺少自动化的数据质量监控告警机制。</p>
+      </div>
+      <div class="issue-card">
+        <div class="i-icon">📝</div>
+        <h4>资产描述与文档缺失</h4>
+        <p>较多表资产缺少业务描述、字段注释和更新日志，新用户或跨部门使用时学习成本高，限制了数据的普及推广。资产文档化率有待提升。</p>
+      </div>
+      <div class="issue-card">
+        <div class="i-icon">🔄</div>
+        <h4>数据更新时效性不均</h4>
+        <p>部分表资产的更新频率不明确，有的 T+1 有的 T+2，业务侧无法准确掌握数据的新鲜度，影响报表和决策的时效性管控。</p>
+      </div>
+    </div>
+
+    <!-- 下半年重点 -->
+    <div class="section-title"><span>🎯 下半年工作规划</span></div>
+
+    <ul class="plan-list">
+      <li>
+        <span class="pnum">1</span>
+        <span><strong>提升表资产质量</strong> — 建立字段命名规范（全小写+下划线），对存量资产进行分批整改，确保新建资产100%符合规范</span>
+      </li>
+      <li>
+        <span class="pnum">2</span>
+        <span><strong>建设数据质量监控体系</strong> — 引入自动化质量校验规则，对核心表资产进行空值率、唯一性、一致性监控，实现异常告警</span>
+      </li>
+      <li>
+        <span class="pnum">3</span>
+        <span><strong>完善资产文档化</strong> — 推动表资产业务描述、字段注释、更新日志的完整覆盖，建立资产文档化标准流程</span>
+      </li>
+      <li>
+        <span class="pnum">4</span>
+        <span><strong>优化数据需求流程</strong> — 梳理并简化数据创建/使用/咨询申请的审批流程，缩短平均响应时间，提升用户体验</span>
+      </li>
+      <li>
+        <span class="pnum">5</span>
+        <span><strong>深化 AI 赋能</strong> — 继续探索 AI 在数据运营中的应用场景，将更多重复性工作自动化，提升整体运营效率</span>
+      </li>
+    </ul>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!--  PAGE 2: AI 赋能实践 -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="page" id="page2">
+
+  <div class="p2-hero">
+    <h1>AI 赋能数据运营实践</h1>
+    <p class="sub">以大模型技术驱动数据运营效率变革 · 2026上半年</p>
+  </div>
+
+  <div class="content-area">
+
+    <!-- KPI -->
+    <div class="kpi-row">
+      <div class="kpi-box">
+        <div class="kpi-top">
+          <span class="kpi-val">6+</span>
+          <span class="kpi-icon">🧠</span>
+        </div>
+        <div class="kpi-lbl">AI 技能/工具沉淀</div>
+        <div class="kpi-sub">可复用的自动化能力</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-top">
+          <span class="kpi-val">20+</span>
+          <span class="kpi-icon">📜</span>
+        </div>
+        <div class="kpi-lbl">知识记忆条目</div>
+        <div class="kpi-sub">技术规范·操作指南·最佳实践</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-top">
+          <span class="kpi-val">3</span>
+          <span class="kpi-icon">⚙️</span>
+        </div>
+        <div class="kpi-lbl">可复用技能封装</div>
+        <div class="kpi-sub">SQL生成·部署·持续积累</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-top">
+          <span class="kpi-val">70%</span>
+          <span class="kpi-icon">📈</span>
+        </div>
+        <div class="kpi-lbl">SQL 编写提效</div>
+        <div class="kpi-sub">从手工编写到 AI 自动生成</div>
+      </div>
+    </div>
+
+    <!-- 技术栈 -->
+    <div class="section-title">🛠️ 技术栈与工具链</div>
+    <div class="tech-tags">
+      <span class="tech-tag blue">Claude AI</span>
+      <span class="tech-tag blue">MCP Protocol</span>
+      <span class="tech-tag green">Denodo 数据集市</span>
+      <span class="tech-tag green">StarRocks</span>
+      <span class="tech-tag violet">GitHub Pages</span>
+      <span class="tech-tag amber">明道云 HAP</span>
+      <span class="tech-tag">Python</span>
+      <span class="tech-tag">Shell</span>
+      <span class="tech-tag">Surge.sh</span>
+    </div>
+
+    <!-- AI 应用场景 -->
+    <div class="section-title">💡 AI 应用场景</div>
+
+    <div class="card-grid">
+      <div class="highlight-card">
+        <div class="h-icon" style="background:#dbeafe;">🗄️</div>
+        <h4>SQL 自动生成</h4>
+        <p>通过 <strong>mdy-to-starrocks-ddl</strong> 技能，将明道云表单字段定义自动转换为 StarRocks ODS→ADS 层完整建表 SQL 和 ETL 脚本，统一字段命名和 JSON 解析规则，效率提升约 70%</p>
+      </div>
+      <div class="highlight-card">
+        <div class="h-icon" style="background:#d1fae5;">📖</div>
+        <h4>知识库系统构建</h4>
+        <p>系统整理 Denodo 数据集市完整知识体系，涵盖架构基础、VQL 语法、函数参考、视图优化、安全权限等 10+ 专题，构建可复用的团队知识库</p>
+      </div>
+      <div class="highlight-card">
+        <div class="h-icon" style="background:#fef3c7;">🔧</div>
+        <h4>技能自动化封装</h4>
+        <p>将高频工作场景封装为可复用的 AI 技能脚本：建表 DDL 生成、HTML 报告部署到 GitHub Pages 等，实现一键式自动化操作</p>
+      </div>
+      <div class="highlight-card">
+        <div class="h-icon" style="background:#ede9fe;">📊</div>
+        <h4>报告自动化生成</h4>
+        <p>AI 自动从数据集市提取数据→生成前端展示页面→部署公共链接，将报告制作时间从数天缩短至数十分钟</p>
+      </div>
+      <div class="highlight-card">
+        <div class="h-icon" style="background:#fce7f3;">📋</div>
+        <h4>规范治理固化</h4>
+        <p>将字段命名规范、MCP 前缀规范、工作表编辑规则等工作标准通过记忆系统持久化，确保 AI 行为随协作持续优化</p>
+      </div>
+      <div class="highlight-card">
+        <div class="h-icon" style="background:#e0f2fe;">🌐</div>
+        <h4>MCP 工具集成</h4>
+        <p>通过 MCP 协议让 AI 直接操作 Denodo 数据集市和明道云 HAP 等企业系统，实现自然语言驱动的数据查询和业务操作</p>
+      </div>
+    </div>
+
+    <!-- 已沉淀技能 -->
+    <div class="section-title">📦 已沉淀的可复用技能</div>
+
+    <div class="skill-item">
+      <span class="s-name">mdy-to-starrocks-ddl</span>
+      <span class="s-desc">明道云表单字段 → StarRocks ODS + ADS 层完整建表 SQL 和 ETL 脚本生成</span>
+      <span class="s-stat">v8 · 持续迭代</span>
+    </div>
+    <div class="skill-item">
+      <span class="s-name">deploy-to-ghpages</span>
+      <span class="s-desc">HTML 文件自动化部署到 GitHub Pages，创建仓库→推送文件→开启 Pages 全链路</span>
+      <span class="s-stat">v1 · 2026.06</span>
+    </div>
+    <div class="skill-item">
+      <span class="s-name">Denodo 知识库</span>
+      <span class="s-desc">Denodo 平台全体系知识记忆（架构·SQL·函数·优化·安全·Scheduler·新功能·最佳实践）</span>
+      <span class="s-stat">10+ 专题</span>
+    </div>
+
+    <!-- 下半年AI规划 -->
+    <div class="section-title" style="margin-top:28px;">🎯 AI 赋能下半年规划</div>
+
+    <ul class="plan-list">
+      <li>
+        <span class="pnum">1</span>
+        <span><strong>数据质量 AI 巡检</strong> — 利用 AI 自动扫描表资产，发现格式不规范、描述缺失、数据异常等问题并生成整改报告</span>
+      </li>
+      <li>
+        <span class="pnum">2</span>
+        <span><strong>更多技能沉淀</strong> — 将数据质量监控、权限审计、工单自动回复等场景封装为新的可复用技能</span>
+      </li>
+      <li>
+        <span class="pnum">3</span>
+        <span><strong>团队推广赋能</strong> — 整理 AI 使用最佳实践文档，向团队成员推广 AI 辅助工作方法，提升整体数字化素养</span>
+      </li>
+    </ul>
+
   </div>
 </div>
 
 </div>
 
-<footer class="footer">
-  <p>📊 2026年度工作总结 · 张淼 · 数据集市运营</p>
-  <p style="margin-top:4px;font-size:12px;">Report generated with ❤️ via Claude AI + Denodo Data Mart</p>
-</footer>
+<script>
+function showPage(n) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.page-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page' + n).classList.add('active');
+  document.querySelectorAll('.page-btn')[n-1].classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
 
 </body>
 </html>
